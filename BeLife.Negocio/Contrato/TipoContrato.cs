@@ -54,9 +54,14 @@ namespace BeLife.Negocio
 
             foreach (var tip in tipoContratoDatos)
             {
-                TipoContrato tipo = new TipoContrato();
-                CommonBC.Syncronize(tip, tipo);
-                tipoContratos.Add(tipo);
+
+                if (tip.IdTipoContrato!=30)
+                {
+                    TipoContrato tipo = new TipoContrato();
+                    CommonBC.Syncronize(tip, tipo);
+                    tipoContratos.Add(tipo);
+                }
+
             }
             return tipoContratos;
         }
