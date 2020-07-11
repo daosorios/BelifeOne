@@ -31,6 +31,11 @@ namespace BelifeWPf
         public BeLife.Negocio.Contrato _contrato;
         public BeLife.Negocio.Cliente _cliente;
 
+        private BeLife.Negocio.Vehiculo Vehiculo;
+        private BeLife.Negocio.Marca Marca;
+        private BeLife.Negocio.Modelo Modelo;
+
+
         //public int Id { get; } = 10; 
 
         public MainWindow()
@@ -424,6 +429,8 @@ namespace BelifeWPf
             CbTipoPlan.SelectedValuePath = "IdTipoContrato";
             CbTipoPlan.SelectedIndex = 0; //Posiciona en el primer registro
 
+   
+
      
 
 
@@ -515,6 +522,7 @@ namespace BelifeWPf
 
             contrato.Numero = Convert.ToDateTime((DateTime.Now)).ToString("yyyyMMddhhmmss");
 
+
             if (contrato.CreateContrato())
             {
                 await this.ShowMessageAsync("Exito", "Contrato Registrado");
@@ -523,9 +531,13 @@ namespace BelifeWPf
             else
             {
                 await this.ShowMessageAsync("Intentalo Nuevamente", "Contrato No Pudo Ser Registrado");
-                
+
             }
         }
+
+
+
+
 
 
         //BOTON ACTUALIZAR 
@@ -980,7 +992,7 @@ namespace BelifeWPf
         {
             CargarContrato();
 
-            if (CbTipoPlan.SelectedIndex == 1)
+            if (CbTipoPlan.SelectedValue.ToString().Equals("20"))
             {
                 Titem_datos_vehiculo.IsEnabled = true;
                 ChBDeclaracionSalud.Visibility = Visibility.Collapsed;
@@ -992,12 +1004,7 @@ namespace BelifeWPf
                 ChBDeclaracionSalud.Visibility = Visibility.Visible;
                 lb_declara.Visibility = Visibility.Visible;
 
-                //Anulando posible contenido de los txt de datos vehiculo
-                txt_patente.Text = null;
-                txt_anio.Text = null;
-                txt_marca.Text = null;
-                txt_modelo.Text = null;
-                //end Anulando posible contenido de los txt de datos vehiculo
+
 
             }
         }
@@ -1039,6 +1046,7 @@ namespace BelifeWPf
 
             }
         }
+
     }
     
 }

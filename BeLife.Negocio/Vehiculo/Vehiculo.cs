@@ -30,10 +30,28 @@ namespace BeLife.Negocio
             NroContrato = string.Empty;
         }
 
-        public void Carga() 
-        { 
-        
-            
+        public bool CreateContratoVehiculo()
+        {
+            Datos.BeLifeEntities bbdd = new Datos.BeLifeEntities();
+            Datos.Contrato contrato = bbdd.Contrato.First(c => c.Numero == NroContrato);
+            Datos.Vehiculo veh = new Datos.Vehiculo();
+
+            try
+            {
+                CommonBC.Syncronize(this, veh);
+                veh.Contrato.Add(contrato);
+                bbdd.Vehiculo.Add(veh);
+                bbdd.SaveChanges();
+                return true;
+            }
+
+            catch (Exception)
+            {
+                bbdd.Vehiculo.Remove(veh);
+                return false;
+            }
+
         }
+
     }
 }
