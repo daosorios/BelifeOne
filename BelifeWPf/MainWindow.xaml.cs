@@ -998,12 +998,25 @@ namespace BelifeWPf
         {
             CargarContrato();
 
-            if (CbTipoPlan.SelectedValue.ToString().Equals("20"))
+            if (CbTipoPlan.SelectedIndex == 1)
             {
-                tabAuto.Visibility = Visibility.Visible;
-            }else if (CbTipoPlan.SelectedValue.ToString().Equals("10"))
+                Titem_datos_vehiculo.IsEnabled = true;
+                ChBDeclaracionSalud.Visibility = Visibility.Collapsed;
+                lb_declara.Visibility = Visibility.Collapsed;
+            }
+            else
             {
-                tabAuto.Visibility = Visibility.Hidden;
+                Titem_datos_vehiculo.IsEnabled = false;
+                ChBDeclaracionSalud.Visibility = Visibility.Visible;
+                lb_declara.Visibility = Visibility.Visible;
+
+                //Anulando posible contenido de los txt de datos vehiculo
+                txt_patente.Text = null;
+                txt_anio.Text = null;
+                txt_marca.Text = null;
+                txt_modelo.Text = null;
+                //end Anulando posible contenido de los txt de datos vehiculo
+
             }
         }
 
