@@ -164,7 +164,7 @@
                     <mah:MetroTabControl Margin="0,27,0,77" Background="Transparent" SelectionChanged="MetroTabControl_SelectionChanged">
 
 
-                        <mah:MetroTabItem Header="●Contratos" Margin="88,0,-88,0"  IsEnabled="False" IsSelected="True"    >
+                        <mah:MetroTabItem Header="●Contratos" Margin="88,0,-88,0"   IsSelected="True"    >
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="77*"/>
@@ -252,7 +252,7 @@
 
                             </Grid>
                         </mah:MetroTabItem>
-                        <mah:MetroTabItem Header="●Datos Vehiculo" Margin="0,0,-130,0"  HorizontalAlignment="Right" Width="204">
+                        <mah:MetroTabItem Header="●Datos Vehiculo" Margin="0,0,-130,0" x:Name="tabAuto"  HorizontalAlignment="Right" Width="204" >
                             <Grid>
                                 <Label Style="{DynamicResource Label}" Content="Patente:" Margin="432,81,467,297" Width="Auto" RenderTransformOrigin="0.495,0.025"></Label>
                                 <Label Style="{DynamicResource Label}" Content="Marca:" Margin="445,200,467,178" Width="Auto"></Label>
@@ -265,7 +265,7 @@
                                     <TextBox x:Name="txtpatente" Style="{DynamicResource Input2}" Margin="-1,1,0,-1" Width="261" Height="Auto" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left"/>
                                 </Border>
                                 <Border  Style="{DynamicResource Input1}" Margin="538,139,185,239" Width="Auto">
-                                    <TextBox Style="{DynamicResource Input2}" Margin="-1,1,15,-1" Width="Auto" Height="Auto" RenderTransformOrigin="0.5,0.5"/>
+                                    <TextBox x:Name="txAño" Style="{DynamicResource Input2}" Margin="-1,1,15,-1" Width="Auto" Height="Auto" RenderTransformOrigin="0.5,0.5"/>
                                 </Border>
                                 <Border  Style="{DynamicResource Input1}" Margin="538,200,185,178" Width="Auto">
                                     <TextBox x:Name="txt_marca" Style="{DynamicResource Input2}" Margin="-1,1,15,-1" Width="Auto" Height="Auto" RenderTransformOrigin="0.5,0.5"/>

@@ -31,6 +31,11 @@ namespace BelifeWPf
         public BeLife.Negocio.Contrato _contrato;
         public BeLife.Negocio.Cliente _cliente;
 
+        private BeLife.Negocio.Vehiculo Vehiculo;
+        private BeLife.Negocio.Marca Marca;
+        private BeLife.Negocio.Modelo Modelo;
+
+
         //public int Id { get; } = 10; 
 
         public MainWindow()
@@ -424,6 +429,8 @@ namespace BelifeWPf
             CbTipoPlan.SelectedValuePath = "IdTipoContrato";
             CbTipoPlan.SelectedIndex = 0; //Posiciona en el primer registro
 
+   
+
      
 
 
@@ -515,6 +522,7 @@ namespace BelifeWPf
 
             contrato.Numero = Convert.ToDateTime((DateTime.Now)).ToString("yyyyMMddhhmmss");
 
+
             if (contrato.CreateContrato())
             {
                 await this.ShowMessageAsync("Exito", "Contrato Registrado");
@@ -523,8 +531,18 @@ namespace BelifeWPf
             else
             {
                 await this.ShowMessageAsync("Intentalo Nuevamente", "Contrato No Pudo Ser Registrado");
-                
+
             }
+        }
+
+
+
+        private void VehiculoData()
+        {
+            Vehiculo.Patente = txtpatente.Text;
+            Vehiculo.IdMarca = int.Parse(txt_marca.Text);
+            Vehiculo.IdModelo = int.Parse(txt_modelo.Text);
+            Vehiculo.Anho = int.Parse(txAño.Text);
         }
 
 
@@ -979,6 +997,14 @@ namespace BelifeWPf
         private void CbTipoPlan_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             CargarContrato();
+
+            if (CbTipoPlan.SelectedValue.ToString().Equals("20"))
+            {
+                tabAuto.Visibility = Visibility.Visible;
+            }else if (CbTipoPlan.SelectedValue.ToString().Equals("10"))
+            {
+                tabAuto.Visibility = Visibility.Hidden;
+            }
         }
 
         private void Lbox_marcas_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -1017,6 +1043,11 @@ namespace BelifeWPf
 
 
             }
+        }
+
+        private void tabAuto_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+
         }
     }
     
