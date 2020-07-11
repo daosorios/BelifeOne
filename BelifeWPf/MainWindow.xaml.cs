@@ -30,10 +30,11 @@ namespace BelifeWPf
 
         public BeLife.Negocio.Contrato _contrato;
         public BeLife.Negocio.Cliente _cliente;
-
-        private BeLife.Negocio.Vehiculo Vehiculo;
-        private BeLife.Negocio.Marca Marca;
-        private BeLife.Negocio.Modelo Modelo;
+        public int idModelo;
+        public int idMarca;
+        //private BeLife.Negocio.Vehiculo Vehiculo;
+        //private BeLife.Negocio.Marca Marca;
+        //private BeLife.Negocio.Modelo Modelo;
 
 
         //public int Id { get; } = 10; 
@@ -429,10 +430,6 @@ namespace BelifeWPf
             CbTipoPlan.SelectedValuePath = "IdTipoContrato";
             CbTipoPlan.SelectedIndex = 0; //Posiciona en el primer registro
 
-   
-
-     
-
 
         }
 
@@ -487,7 +484,7 @@ namespace BelifeWPf
 
 
             contrato.RutCliente = TxRutCliente.Text;
-
+     
             contrato.FechaCreacion = DateTime.Today;
             contrato.FechaTermino = (DateTime)DpFechaTermino.SelectedDate;
             contrato.FechaInicioVigencia = (DateTime)DpFechaInicioVig.SelectedDate;
@@ -525,6 +522,19 @@ namespace BelifeWPf
 
             if (contrato.CreateContrato())
             {
+                if (CbTipoPlan.SelectedValue.ToString().Equals("20"))
+                {
+                    Vehiculo veh = new Vehiculo();
+
+                    veh.Numero = contrato.Numero;
+                    veh.Patente = txt_patente.Text;
+                    veh.IdModelo = idModelo;
+                    veh.IdMarca = idMarca;
+                    veh.Anho = int.Parse(txt_anio.Text);
+
+                    veh.CreateContratoVehiculo();
+
+                }
                 await this.ShowMessageAsync("Exito", "Contrato Registrado");
                 LimpiarControles();
             }
@@ -533,6 +543,8 @@ namespace BelifeWPf
                 await this.ShowMessageAsync("Intentalo Nuevamente", "Contrato No Pudo Ser Registrado");
 
             }
+
+
         }
 
 
@@ -1018,6 +1030,7 @@ namespace BelifeWPf
                 var VehiculoMarca = (Marca)item.SelectedItem;
 
                 txt_marca.Text = VehiculoMarca.Descripcion;
+                idMarca = VehiculoMarca.IdMarca;
                 lbox_modelos.ItemsSource = mode.ReadAllByMarca(VehiculoMarca.IdMarca);
                 lbox_modelos.Items.Refresh();
             }
@@ -1038,6 +1051,7 @@ namespace BelifeWPf
                 var item = (ListBox)sender;
                 var VehiculoModelo = (Modelo)item.SelectedItem;
                 txt_modelo.Text = VehiculoModelo.Descripcion;
+                idModelo = VehiculoModelo.IdModelo;
             }
             catch (Exception)
             {
