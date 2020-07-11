@@ -537,13 +537,7 @@ namespace BelifeWPf
 
 
 
-        private void VehiculoData()
-        {
-            Vehiculo.Patente = txtpatente.Text;
-            Vehiculo.IdMarca = int.Parse(txt_marca.Text);
-            Vehiculo.IdModelo = int.Parse(txt_modelo.Text);
-            Vehiculo.Anho = int.Parse(txAño.Text);
-        }
+
 
 
         //BOTON ACTUALIZAR 
@@ -998,7 +992,7 @@ namespace BelifeWPf
         {
             CargarContrato();
 
-            if (CbTipoPlan.SelectedIndex == 1)
+            if (CbTipoPlan.SelectedValue.ToString().Equals("20"))
             {
                 Titem_datos_vehiculo.IsEnabled = true;
                 ChBDeclaracionSalud.Visibility = Visibility.Collapsed;
@@ -1010,12 +1004,7 @@ namespace BelifeWPf
                 ChBDeclaracionSalud.Visibility = Visibility.Visible;
                 lb_declara.Visibility = Visibility.Visible;
 
-                //Anulando posible contenido de los txt de datos vehiculo
-                txt_patente.Text = null;
-                txt_anio.Text = null;
-                txt_marca.Text = null;
-                txt_modelo.Text = null;
-                //end Anulando posible contenido de los txt de datos vehiculo
+
 
             }
         }
