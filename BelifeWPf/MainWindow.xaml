@@ -252,7 +252,11 @@
 
                             </Grid>
                         </mah:MetroTabItem>
+<<<<<<< HEAD
                         <mah:MetroTabItem x:Name="Titem_datos_vehiculo" Header="●Datos Vehiculo" Margin="0,0,-130,0"  HorizontalAlignment="Right" Width="204">
+=======
+                        <mah:MetroTabItem Header="●Datos Vehiculo" Margin="0,0,-130,0" x:Name="tabAuto"  HorizontalAlignment="Right" Width="204" >
+>>>>>>> Fuenzalida
                             <Grid>
                                 <Label Style="{DynamicResource Label}" Content="Patente:" Margin="432,81,467,297" Width="Auto" RenderTransformOrigin="0.495,0.025"></Label>
                                 <Label Style="{DynamicResource Label}" Content="Marca:" Margin="445,200,467,178" Width="Auto"></Label>
@@ -265,7 +269,11 @@
                                     <TextBox x:Name="txt_patente" Style="{DynamicResource Input2}" Margin="-1,1,0,-1" Width="261" Height="Auto" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left"/>
                                 </Border>
                                 <Border  Style="{DynamicResource Input1}" Margin="538,139,185,239" Width="Auto">
+<<<<<<< HEAD
                                     <TextBox x:Name="txt_anio" Style="{DynamicResource Input2}" Margin="-1,1,15,-1" Width="Auto" Height="Auto" RenderTransformOrigin="0.5,0.5"/>
+=======
+                                    <TextBox x:Name="txAño" Style="{DynamicResource Input2}" Margin="-1,1,15,-1" Width="Auto" Height="Auto" RenderTransformOrigin="0.5,0.5"/>
+>>>>>>> Fuenzalida
                                 </Border>
                                 <Border  Style="{DynamicResource Input1}" Margin="538,200,185,178" Width="Auto">
                                     <TextBox x:Name="txt_marca" Style="{DynamicResource Input2}" Margin="-1,1,15,-1" Width="Auto" Height="Auto" RenderTransformOrigin="0.5,0.5"/>
