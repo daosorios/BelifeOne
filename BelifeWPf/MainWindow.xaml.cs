@@ -54,11 +54,12 @@ namespace BelifeWPf
 
             //registro contrato
         
-       
-
             //Listado de contratos
             CargarContratos();
             //CargarPoliza();
+
+            Marca mar = new Marca();
+            lbox_marcas.ItemsSource = mar.ReadAll();
 
         }
 
@@ -978,6 +979,44 @@ namespace BelifeWPf
         private void CbTipoPlan_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             CargarContrato();
+        }
+
+        private void Lbox_marcas_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                Modelo mode = new Modelo();
+                var item = (ListBox)sender;
+                var VehiculoMarca = (Marca)item.SelectedItem;
+
+                txt_marca.Text = VehiculoMarca.Descripcion;
+                lbox_modelos.ItemsSource = mode.ReadAllByMarca(VehiculoMarca.IdMarca);
+                lbox_modelos.Items.Refresh();
+            }
+            catch (Exception)
+            {
+                txt_marca.Text = null;
+                lbox_modelos.Items.Refresh();
+
+
+            }
+
+        }
+
+        private void Lbox_modelos_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                var item = (ListBox)sender;
+                var VehiculoModelo = (Modelo)item.SelectedItem;
+                txt_modelo.Text = VehiculoModelo.Descripcion;
+            }
+            catch (Exception)
+            {
+                txt_modelo.Text = null;
+
+
+            }
         }
     }
     
