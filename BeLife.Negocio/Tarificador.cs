@@ -129,24 +129,28 @@ namespace BeLife.Negocio
 
         public Double Prima_anual(String rut)
         {
-            Datos.BeLifeEntities bbdd = new Datos.BeLifeEntities();
+
+         
+                Datos.BeLifeEntities bbdd = new Datos.BeLifeEntities();
 
 
-            //busco a la persona con este rut
-            Datos.Cliente cli = bbdd.Cliente.First(e => e.RutCliente == rut);
+                //busco a la persona con este rut
+                Datos.Cliente cli = bbdd.Cliente.First(e => e.RutCliente == rut);
 
-            //extraigo  la fecha de nacimiento
-            DateTime Fn = cli.FechaNacimiento;
-            int sx = cli.IdSexo;
-            int Ec = cli.IdEstadoCivil;
+                //extraigo  la fecha de nacimiento
+                DateTime Fn = cli.FechaNacimiento;
+                int sx = cli.IdSexo;
+                int Ec = cli.IdEstadoCivil;
 
-            //Combertir el el dato de fecha de nacimiento a edad  
-            int Edad = calcularEdad(Fn);
+                //Combertir el el dato de fecha de nacimiento a edad  
+                int Edad = calcularEdad(Fn);
 
-            //captar la prima
-            Double Prima = Clarec(Edad, sx, Ec);
+                //captar la prima
+                Double Prima = Clarec(Edad, sx, Ec);
 
-            return Prima;
+                return Prima;
+
+ 
         }
     }
 }
