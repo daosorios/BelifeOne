@@ -549,7 +549,17 @@ namespace BelifeWPf
 
 
 
+<<<<<<< Updated upstream
 
+=======
+        private void VehiculoData()
+        {
+            Vehiculo.Patente = txtpatente.Text;
+            Vehiculo.IdMarca = int.Parse(txt_marca.Text);
+            Vehiculo.IdModelo = int.Parse(txt_modelo.Text);
+            Vehiculo.Anho = int.Parse(txAño.Text);
+        }
+>>>>>>> Stashed changes
 
 
         //BOTON ACTUALIZAR 
@@ -1004,7 +1014,12 @@ namespace BelifeWPf
         {
             CargarContrato();
 
+<<<<<<< Updated upstream
             if (CbTipoPlan.SelectedValue.ToString().Equals("20"))
+=======
+<<<<<<< HEAD
+            if (CbTipoPlan.SelectedIndex == 1)
+>>>>>>> Stashed changes
             {
                 Titem_datos_vehiculo.IsEnabled = true;
                 ChBDeclaracionSalud.Visibility = Visibility.Collapsed;
@@ -1018,6 +1033,14 @@ namespace BelifeWPf
 
 
 
+=======
+            if (CbTipoPlan.SelectedValue.ToString().Equals("20"))
+            {
+                tabAuto.Visibility = Visibility.Visible;
+            }else if (CbTipoPlan.SelectedValue.ToString().Equals("10"))
+            {
+                tabAuto.Visibility = Visibility.Hidden;
+>>>>>>> Fuenzalida
             }
         }
 
@@ -1061,6 +1084,13 @@ namespace BelifeWPf
             }
         }
 
+<<<<<<< Updated upstream
+=======
+        private void tabAuto_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+
+        }
+>>>>>>> Stashed changes
     }
     
 }
