@@ -1045,10 +1045,6 @@ namespace BelifeWPf
             }
         }
 
-        private void tabAuto_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-
-        }
     }
     
 }
