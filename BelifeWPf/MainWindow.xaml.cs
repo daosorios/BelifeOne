@@ -979,6 +979,27 @@ namespace BelifeWPf
         private void CbTipoPlan_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             CargarContrato();
+
+            if (CbTipoPlan.SelectedIndex == 1)
+            {
+                Titem_datos_vehiculo.IsEnabled = true;
+                ChBDeclaracionSalud.Visibility = Visibility.Collapsed;
+                lb_declara.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                Titem_datos_vehiculo.IsEnabled = false;
+                ChBDeclaracionSalud.Visibility = Visibility.Visible;
+                lb_declara.Visibility = Visibility.Visible;
+
+                //Anulando posible contenido de los txt de datos vehiculo
+                txt_patente.Text = null;
+                txt_anio.Text = null;
+                txt_marca.Text = null;
+                txt_modelo.Text = null;
+                //end Anulando posible contenido de los txt de datos vehiculo
+
+            }
         }
 
         private void Lbox_marcas_SelectionChanged(object sender, SelectionChangedEventArgs e)
