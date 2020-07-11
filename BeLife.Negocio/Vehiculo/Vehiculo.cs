@@ -10,11 +10,15 @@ namespace BeLife.Negocio
 {
     public class Vehiculo
     {
-        public string Patente { get; set; } 
-        public int IdMarca { get; set; } 
+
+        public string Patente { get; set; }
+        public int IdMarca { get; set; }
         public int IdModelo { get; set; }
         public int Anho { get; set; }
-        public string NroContrato { get; set; }
+        public string Numero { get; set; }
+
+
+
 
         public Vehiculo()
         {
@@ -27,31 +31,33 @@ namespace BeLife.Negocio
             IdMarca = 0;
             IdModelo = 0;
             Anho = 0;
-            NroContrato = string.Empty;
+            Numero = string.Empty;
         }
 
         public bool CreateContratoVehiculo()
         {
             Datos.BeLifeEntities bbdd = new Datos.BeLifeEntities();
-            Datos.Contrato contrato = bbdd.Contrato.First(c => c.Numero == NroContrato);
-            Datos.Vehiculo veh = new Datos.Vehiculo();
+            Datos.Contrato contrato = bbdd.Contrato.First(c => c.Numero == Numero);
+            Datos.Vehiculo vehiculo = new Datos.Vehiculo();
 
             try
             {
-                CommonBC.Syncronize(this, veh);
-                veh.Contrato.Add(contrato);
-                bbdd.Vehiculo.Add(veh);
+                CommonBC.Syncronize(this, vehiculo);
+                vehiculo.Contrato.Add(contrato);
+                bbdd.Vehiculo.Add(vehiculo);
                 bbdd.SaveChanges();
                 return true;
             }
 
             catch (Exception)
             {
-                bbdd.Vehiculo.Remove(veh);
+                bbdd.Vehiculo.Remove(vehiculo);
                 return false;
             }
 
         }
+
+
 
     }
 }
