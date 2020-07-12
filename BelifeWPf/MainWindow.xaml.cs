@@ -1232,9 +1232,13 @@ namespace BelifeWPf
             }
 
             await this.ShowMessageAsync("Información", "Se ha Recuperado la Información de Contrato");
+            
         }
 
-
+        private void BtSaveMem_Click(object sender, RoutedEventArgs e)
+        {
+            SaveMemento();
+        }
     }
 
 }

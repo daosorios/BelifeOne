@@ -393,6 +393,12 @@
             <Image Style="{DynamicResource Imagen360-Contraste}"/>
         </Button>
 
+        <Button x:Name="BtSaveMem" Style="{DynamicResource boton360Save}" Height="34" Width="34" Margin="85,556,881,10" Background="Transparent" Click="BtSaveMem_Click">
+            <Image Source="Imagenes/SaveMem.png"/>
+        </Button>
+        
+        
+
         <mah:Flyout x:Name="fly" Background="Black" Opacity="0.7" Margin="-2,72,0,72" Foreground="#FFD6D6D6" Width="108">
             <Canvas Height="384">
 
