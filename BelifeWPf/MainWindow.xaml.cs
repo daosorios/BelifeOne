@@ -36,8 +36,8 @@ namespace BelifeWPf
         public BeLife.Negocio.Cliente _cliente;
         public int idModelo;
         public int idMarca;
-       
-      
+
+        Contrato con = new Contrato();
 
         //private BeLife.Negocio.Vehiculo Vehiculo;
         //private BeLife.Negocio.Marca Marca;
@@ -50,9 +50,10 @@ namespace BelifeWPf
         {
             InitializeComponent();
             Init();
-        
 
+            
             Timer();
+            ReadMemento();
             Cargar();
             CargarSexo();
             CargarEstado();
@@ -1134,7 +1135,7 @@ namespace BelifeWPf
                 contrato.DeclaracionSalud = ChBDeclaracionSalud.IsChecked.Value;
                
                   
-                contrato.Numero = Convert.ToDateTime((DateTime.Now)).ToString("yyyyMMddhhmmss");
+                contrato.Numero = TxNContrato.Text;
 
 
                 //Vehiculo veh = new Vehiculo();
@@ -1159,7 +1160,7 @@ namespace BelifeWPf
 
         public void Timer()
         {
-            int minutos = 1;
+            int minutos = 5;
             DispatcherTimer TimerCache = new DispatcherTimer();
             try
             {
@@ -1174,6 +1175,8 @@ namespace BelifeWPf
             }
         }
 
+
+
         private void dtTicker(object sender, EventArgs e)
         {
 
@@ -1182,6 +1185,55 @@ namespace BelifeWPf
             //MessageBox.Show("test");
 
         }
+
+        // Lee los datos de un memento
+        public void ReadMemento()
+        {
+           
+            estadoAnterior.DeserializarXML();
+            con= estadoAnterior.MementoContrato;
+            Read();
+        }
+
+        private async void Read()
+        {         
+          
+            TxNContrato.Text = con.Numero;
+            TxRutCliente.Text = con.RutCliente;
+            DpFechaCreacion.SelectedDate = con.FechaCreacion;
+            DpFechaTermino.SelectedDate = con.FechaTermino;
+            DpFechaInicioVig.SelectedDate = con.FechaInicioVigencia;
+            DpFechaFInVig.SelectedDate = con.FechaFinVigencia;
+            TxPrimaMensual.Text = con.PrimaMensual.ToString();
+            TxPrimaAnual.Text = con.PrimaAnual.ToString();
+            CbCodigoPlan.SelectedValue = con.CodigoPlan;
+            CbTipoPlan.SelectedValue = con.IdTipoContrato;
+            TxObservaciones.Text = con.Observaciones;
+           
+
+            //Checkbox de vigencia
+            if (con.Vigente == true)
+            {
+                ChBVigencia.IsChecked = true;
+            }
+            else
+            {
+                ChBVigencia.IsChecked = false;
+            }
+
+            //Checkbox de decaracion salud
+            if (con.DeclaracionSalud == true)
+            {
+                ChBDeclaracionSalud.IsChecked = true;
+            }
+            else
+            {
+                ChBDeclaracionSalud.IsChecked = false;
+            }
+
+            await this.ShowMessageAsync("Información", "Se ha Recuperado la Información de Contrato");
+        }
+
 
     }
 

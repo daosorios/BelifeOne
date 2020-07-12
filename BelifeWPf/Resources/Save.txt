@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <EstadoAnterior xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <MementoContrato>
-    <Numero>20200712045919</Numero>
-    <FechaCreacion>2020-07-11T00:00:00</FechaCreacion>
-    <FechaTermino>2026-07-11T00:00:00</FechaTermino>
-    <RutCliente>123456</RutCliente>
-    <CodigoPlan>VEH02</CodigoPlan>
-    <IdTipoContrato>20</IdTipoContrato>
-    <FechaInicioVigencia>2020-07-10T00:00:00</FechaInicioVigencia>
-    <FechaFinVigencia>2021-07-10T00:00:00</FechaFinVigencia>
-    <Vigente>false</Vigente>
-    <DeclaracionSalud>false</DeclaracionSalud>
-    <PrimaAnual>9.5</PrimaAnual>
+    <Numero>20200709105810</Numero>
+    <FechaCreacion>2020-07-09T00:00:00</FechaCreacion>
+    <FechaTermino>2021-07-09T00:00:00</FechaTermino>
+    <RutCliente>183257161</RutCliente>
+    <CodigoPlan>VID01</CodigoPlan>
+    <IdTipoContrato>10</IdTipoContrato>
+    <FechaInicioVigencia>2020-07-09T00:00:00</FechaInicioVigencia>
+    <FechaFinVigencia>2021-07-09T00:00:00</FechaFinVigencia>
+    <Vigente>true</Vigente>
+    <DeclaracionSalud>true</DeclaracionSalud>
+    <PrimaAnual>8</PrimaAnual>
     <PrimaMensual>0</PrimaMensual>
-    <Observaciones>96</Observaciones>
+    <Observaciones>787896245</Observaciones>
   </MementoContrato>
 </EstadoAnterior>
