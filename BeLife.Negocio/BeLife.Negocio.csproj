@@ -51,8 +51,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PersistenciaMemento.cs" />
-    <Compile Include="EstadoAnterior.cs" />
+    <Compile Include="Memento\PersistenciaMemento.cs" />
+    <Compile Include="Memento\EstadoAnterior.cs" />
     <Compile Include="Vehiculo\Marca.cs" />
     <Compile Include="Vehiculo\Modelo.cs" />
     <Compile Include="Vehiculo\Vehiculo.cs" />
