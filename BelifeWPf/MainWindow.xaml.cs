@@ -17,6 +17,7 @@ using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using MahApps.Metro.Behaviours;
 using BeLife.Negocio;
+using System.Windows.Threading;
 
 namespace BelifeWPf
 {
@@ -26,12 +27,18 @@ namespace BelifeWPf
     public partial class MainWindow : MetroWindow
     {
 
+        private PersistenciaMemento Caretaker;
+        private EstadoAnterior estadoAnterior;
+
         bool AltoContraste = false;
 
         public BeLife.Negocio.Contrato _contrato;
         public BeLife.Negocio.Cliente _cliente;
         public int idModelo;
         public int idMarca;
+       
+      
+
         //private BeLife.Negocio.Vehiculo Vehiculo;
         //private BeLife.Negocio.Marca Marca;
         //private BeLife.Negocio.Modelo Modelo;
@@ -42,6 +49,10 @@ namespace BelifeWPf
         public MainWindow()
         {
             InitializeComponent();
+            Init();
+        
+
+                Timer();
             Cargar();
             CargarSexo();
             CargarEstado();
@@ -68,6 +79,16 @@ namespace BelifeWPf
             lbox_marcas.ItemsSource = mar.ReadAll();
 
         }
+
+
+        private void Init()
+        {
+
+            Caretaker = new PersistenciaMemento();
+            estadoAnterior = new EstadoAnterior();
+       
+        }
+
 
         private void Btn_despliegaFly_Click(object sender, RoutedEventArgs e)
         {
@@ -560,7 +581,6 @@ namespace BelifeWPf
             Vehiculo.Anho = int.Parse(txAño.Text);
         }
 >>>>>>> Stashed changes
-
 
         //BOTON ACTUALIZAR 
         private async void BtActualizarContrato_Click(object sender, RoutedEventArgs e)
@@ -1084,6 +1104,7 @@ namespace BelifeWPf
             }
         }
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
         private void tabAuto_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -1091,6 +1112,90 @@ namespace BelifeWPf
 
         }
 >>>>>>> Stashed changes
+=======
+
+        public void SaveMemento()
+        {
+            try
+            {
+                Contrato contrato = new Contrato();
+
+                //contrato.Numero = TxNContrato.Text.ToString();
+                //contrato.RutCliente = TxRutCliente.Text;
+                //contrato.FechaCreacion = (DateTime)DpFechaCreacion.SelectedDate;
+                //contrato.FechaTermino = (DateTime)DpFechaTermino.SelectedDate;
+                //contrato.FechaInicioVigencia = (DateTime)DpFechaInicioVig.SelectedDate;
+                //contrato.FechaFinVigencia = (DateTime)DpFechaFInVig.SelectedDate;
+                //contrato.PrimaMensual = Convert.ToDouble(TxPrimaMensual.Text);
+                //contrato.PrimaAnual = Convert.ToDouble(TxPrimaAnual.Text);
+                //contrato.CodigoPlan = CbCodigoPlan.SelectedValue.ToString();
+                //contrato.IdTipoContrato = int.Parse(CbTipoPlan.SelectedValue.ToString());
+                //contrato.Observaciones = TxObservaciones.Text;
+                //ChBVigencia.IsEnabled = true;
+
+                contrato.Numero = "sdas";
+                contrato.RutCliente = "dds";
+                contrato.FechaCreacion = DateTime.Today;
+                contrato.FechaTermino = DateTime.Today;
+                contrato.FechaInicioVigencia = DateTime.Today;
+                contrato.FechaFinVigencia = DateTime.Today;
+                contrato.PrimaMensual = 1;
+                contrato.PrimaAnual = 1;
+                contrato.CodigoPlan = "dfg";
+                contrato.IdTipoContrato = 1;
+                contrato.Observaciones = "sdf";
+                contrato.Vigente = true;
+                contrato.DeclaracionSalud = true;
+
+
+
+                //Vehiculo veh = new Vehiculo();
+
+                //veh.Numero = contrato.Numero;
+                //veh.Patente = txt_patente.Text;
+                //veh.IdModelo = idModelo;
+                //veh.IdMarca = idMarca;
+                //veh.Anho = int.Parse(txt_anio.Text);
+
+
+                Caretaker.Memento = contrato.CrearMemento(contrato);
+                Caretaker.Memento.SerializarXml();
+                MessageBox.Show("ok");
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("dssdf"+ e.Message);
+
+            }
+        }
+
+        public void Timer()
+        {
+            int minutos = 1;
+            DispatcherTimer TimerCache = new DispatcherTimer();
+            try
+            {
+                MessageBox.Show("ok" + minutos);
+                TimerCache.Interval = TimeSpan.FromMinutes(minutos);
+                TimerCache.Tick += dtTicker;
+                TimerCache.Start();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private void dtTicker(object sender, EventArgs e)
+        {
+
+            SaveMemento();
+
+            MessageBox.Show("test");
+
+        }
+
+>>>>>>> Osorio
     }
-    
+
 }

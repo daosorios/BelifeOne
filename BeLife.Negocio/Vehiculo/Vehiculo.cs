@@ -59,5 +59,27 @@ namespace BeLife.Negocio
 
 
 
+
+        public void SetMemento(EstadoAnterior memento)
+        {
+            //////////CommonBC.Syncronize(this, memento.MementoVehiculo);
+            //this.Patente = memento.MementoVehiculo.Patente;
+            //this.Anho = memento.MementoVehiculo.Anho;
+            //this.IdMarca = memento.MementoVehiculo.IdMarca;
+            //this.IdModelo = memento.MementoVehiculo.IdModelo;
+
+        }
+
+        public EstadoAnterior CrearMemento(Contrato contrato)
+        {
+            EstadoAnterior estadoAnterior = new EstadoAnterior();
+            //CommonBC.Syncronize(this, estadoAnterior.MementoVehiculo);
+            CommonBC.Syncronize(contrato, estadoAnterior.MementoContrato);
+
+
+            return estadoAnterior;
+
+        }
+
     }
 }

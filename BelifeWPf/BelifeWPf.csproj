@@ -190,6 +190,9 @@
   <ItemGroup>
     <Resource Include="ImagenesAltoContraste\Command-Refresh-Black.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Save.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

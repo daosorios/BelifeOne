@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<EstadoAnterior xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <MementoContrato>
+    <Numero>sdas</Numero>
+    <FechaCreacion>2020-07-11T00:00:00-04:00</FechaCreacion>
+    <FechaTermino>2020-07-11T00:00:00-04:00</FechaTermino>
+    <RutCliente>dds</RutCliente>
+    <CodigoPlan>dfg</CodigoPlan>
+    <IdTipoContrato>1</IdTipoContrato>
+    <FechaInicioVigencia>2020-07-11T00:00:00-04:00</FechaInicioVigencia>
+    <FechaFinVigencia>2020-07-11T00:00:00-04:00</FechaFinVigencia>
+    <Vigente>true</Vigente>
+    <DeclaracionSalud>true</DeclaracionSalud>
+    <PrimaAnual>1</PrimaAnual>
+    <PrimaMensual>1</PrimaMensual>
+    <Observaciones>sdf</Observaciones>
+  </MementoContrato>
+</EstadoAnterior>
