@@ -52,7 +52,7 @@ namespace BelifeWPf
             Init();
         
 
-                Timer();
+            Timer();
             Cargar();
             CargarSexo();
             CargarEstado();
@@ -86,7 +86,22 @@ namespace BelifeWPf
 
             Caretaker = new PersistenciaMemento();
             estadoAnterior = new EstadoAnterior();
-       
+
+            TxNContrato.Text = " ";
+            TxRutCliente.Text = " ";
+            LbNombreCliente.Content = " ";       
+            DpFechaCreacion.SelectedDate = DateTime.Today;
+            DpFechaTermino.SelectedDate = DateTime.Today;
+            DpFechaInicioVig.SelectedDate = DateTime.Today;
+            DpFechaFInVig.SelectedDate = DateTime.Today;
+        
+            CbCodigoPlan.SelectedValue = 1;
+            CbTipoPlan.SelectedValue = 1;
+            TxObservaciones.Text = " ";
+            ChBVigencia.IsChecked = false;
+            ChBDeclaracionSalud.IsChecked = false;
+
+
         }
 
 
@@ -723,6 +738,7 @@ namespace BelifeWPf
         private async void BtTerminarContrato_Click(object sender, RoutedEventArgs e)
         {
             Contrato contrato = new Contrato();
+
             contrato.Numero = TxNContrato.Text;
             contrato.RutCliente = TxRutCliente.Text;
             contrato.FechaCreacion = (DateTime)DpFechaCreacion.SelectedDate;
@@ -1088,33 +1104,37 @@ namespace BelifeWPf
             {
                 Contrato contrato = new Contrato();
 
-                //contrato.Numero = TxNContrato.Text.ToString();
-                //contrato.RutCliente = TxRutCliente.Text;
-                //contrato.FechaCreacion = (DateTime)DpFechaCreacion.SelectedDate;
-                //contrato.FechaTermino = (DateTime)DpFechaTermino.SelectedDate;
-                //contrato.FechaInicioVigencia = (DateTime)DpFechaInicioVig.SelectedDate;
-                //contrato.FechaFinVigencia = (DateTime)DpFechaFInVig.SelectedDate;
-                //contrato.PrimaMensual = Convert.ToDouble(TxPrimaMensual.Text);
-                //contrato.PrimaAnual = Convert.ToDouble(TxPrimaAnual.Text);
-                //contrato.CodigoPlan = CbCodigoPlan.SelectedValue.ToString();
-                //contrato.IdTipoContrato = int.Parse(CbTipoPlan.SelectedValue.ToString());
-                //contrato.Observaciones = TxObservaciones.Text;
-                //ChBVigencia.IsEnabled = true;
-
-                contrato.Numero = "sdas";
-                contrato.RutCliente = "dds";
-                contrato.FechaCreacion = DateTime.Today;
-                contrato.FechaTermino = DateTime.Today;
-                contrato.FechaInicioVigencia = DateTime.Today;
-                contrato.FechaFinVigencia = DateTime.Today;
-                contrato.PrimaMensual = 1;
-                contrato.PrimaAnual = 1;
-                contrato.CodigoPlan = "dfg";
-                contrato.IdTipoContrato = 1;
-                contrato.Observaciones = "sdf";
-                contrato.Vigente = true;
-                contrato.DeclaracionSalud = true;
-
+                LbNombreCliente.Content = " ";           
+                contrato.RutCliente = TxRutCliente.Text;
+                contrato.FechaCreacion = (DateTime)DpFechaCreacion.SelectedDate;
+                contrato.FechaTermino = (DateTime)DpFechaTermino.SelectedDate;
+                contrato.FechaInicioVigencia = (DateTime)DpFechaInicioVig.SelectedDate;
+                contrato.FechaFinVigencia = (DateTime)DpFechaFInVig.SelectedDate;
+                if (TxPrimaMensual.Text.Equals(""))
+                {
+                    contrato.PrimaMensual = 0;
+                }
+                else
+                {
+                    contrato.PrimaAnual = Convert.ToDouble(TxPrimaMensual.Text);
+                }
+                if (TxPrimaAnual.Text.Equals(""))
+                {
+                    contrato.PrimaAnual = 0;
+                }
+                else
+                {
+                    contrato.PrimaAnual = Convert.ToDouble(TxPrimaAnual.Text);
+                }
+                contrato.PrimaAnual = Convert.ToDouble(TxPrimaAnual.Text);
+                contrato.CodigoPlan = CbCodigoPlan.SelectedValue.ToString();
+                contrato.IdTipoContrato = int.Parse(CbTipoPlan.SelectedValue.ToString());
+                contrato.Observaciones = TxObservaciones.Text;
+                contrato.Vigente = ChBVigencia.IsChecked.Value;
+                contrato.DeclaracionSalud = ChBDeclaracionSalud.IsChecked.Value;
+               
+                  
+                contrato.Numero = Convert.ToDateTime((DateTime.Now)).ToString("yyyyMMddhhmmss");
 
 
                 //Vehiculo veh = new Vehiculo();
@@ -1132,7 +1152,7 @@ namespace BelifeWPf
             }
             catch (Exception e)
             {
-                MessageBox.Show("dssdf"+ e.Message);
+               // MessageBox.Show("dssdf"+ e.Message);
 
             }
         }
@@ -1143,7 +1163,7 @@ namespace BelifeWPf
             DispatcherTimer TimerCache = new DispatcherTimer();
             try
             {
-                MessageBox.Show("ok" + minutos);
+                //MessageBox.Show("ok" + minutos);
                 TimerCache.Interval = TimeSpan.FromMinutes(minutos);
                 TimerCache.Tick += dtTicker;
                 TimerCache.Start();
@@ -1159,7 +1179,7 @@ namespace BelifeWPf
 
             SaveMemento();
 
-            MessageBox.Show("test");
+            //MessageBox.Show("test");
 
         }
 
