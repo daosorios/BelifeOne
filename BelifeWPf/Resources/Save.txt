@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <EstadoAnterior xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <MementoContrato>
-    <Numero>20200711060603</Numero>
-    <FechaCreacion>2020-07-11T00:00:00</FechaCreacion>
-    <FechaTermino>2026-07-11T00:00:00</FechaTermino>
-    <RutCliente>123456</RutCliente>
-    <CodigoPlan>VEH01</CodigoPlan>
-    <IdTipoContrato>20</IdTipoContrato>
-    <FechaInicioVigencia>2020-07-10T00:00:00</FechaInicioVigencia>
-    <FechaFinVigencia>2021-07-10T00:00:00</FechaFinVigencia>
-    <Vigente>false</Vigente>
-    <DeclaracionSalud>false</DeclaracionSalud>
-    <PrimaAnual>9.5</PrimaAnual>
+    <Numero />
+    <FechaCreacion>2020-07-12T00:00:00-04:00</FechaCreacion>
+    <FechaTermino>2020-07-12T00:00:00-04:00</FechaTermino>
+    <RutCliente />
+    <CodigoPlan />
+    <IdTipoContrato>0</IdTipoContrato>
+    <FechaInicioVigencia>2020-07-12T00:00:00-04:00</FechaInicioVigencia>
+    <FechaFinVigencia>2020-07-12T00:00:00-04:00</FechaFinVigencia>
+    <Vigente>true</Vigente>
+    <DeclaracionSalud>true</DeclaracionSalud>
+    <PrimaAnual>0</PrimaAnual>
     <PrimaMensual>0</PrimaMensual>
-    <Observaciones>96</Observaciones>
+    <Observaciones />
   </MementoContrato>
+  <MementoVehiculo>
+    <Patente> 254</Patente>
+    <IdMarca>14</IdMarca>
+    <IdModelo>128</IdModelo>
+    <Anho>1998</Anho>
+    <Numero>20200711060603</Numero>
+  </MementoVehiculo>
 </EstadoAnterior>

@@ -58,23 +58,36 @@ namespace BeLife.Negocio
         }
 
 
+        public bool Read()
+        {
+            Datos.BeLifeEntities bbdd = new Datos.BeLifeEntities();
+            Datos.Vehiculo vehiculo = bbdd.Vehiculo.First(v => v.Patente == Patente);
+            try
+            {
+                CommonBC.Syncronize(vehiculo, this);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        } 
 
 
         public void SetMemento(EstadoAnterior memento)
         {
-            //////////CommonBC.Syncronize(this, memento.MementoVehiculo);
-            //this.Patente = memento.MementoVehiculo.Patente;
-            //this.Anho = memento.MementoVehiculo.Anho;
-            //this.IdMarca = memento.MementoVehiculo.IdMarca;
-            //this.IdModelo = memento.MementoVehiculo.IdModelo;
+            CommonBC.Syncronize(this, memento.MementoVehiculo);
 
         }
 
-        public EstadoAnterior CrearMemento(Contrato contrato)
+
+        public EstadoAnterior CrearMemento(Vehiculo veh)
         {
+
+            Console.WriteLine("entrando a memento");
             EstadoAnterior estadoAnterior = new EstadoAnterior();
-            //CommonBC.Syncronize(this, estadoAnterior.MementoVehiculo);
-            CommonBC.Syncronize(contrato, estadoAnterior.MementoContrato);
+            CommonBC.Syncronize(this, estadoAnterior.MementoVehiculo);
+            CommonBC.Syncronize(veh, estadoAnterior.MementoVehiculo);
 
 
             return estadoAnterior;

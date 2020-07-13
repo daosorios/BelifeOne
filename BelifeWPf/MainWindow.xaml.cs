@@ -50,8 +50,10 @@ namespace BelifeWPf
         {
             InitializeComponent();
             Init();
+            InitVeh();
 
-            
+
+
             Timer();
             ReadMemento();
             Cargar();
@@ -101,6 +103,37 @@ namespace BelifeWPf
             TxObservaciones.Text = " ";
             ChBVigencia.IsChecked = false;
             ChBDeclaracionSalud.IsChecked = false;
+
+
+        }
+
+        private void InitVeh()
+        {
+
+            Caretaker = new PersistenciaMemento();
+            estadoAnterior = new EstadoAnterior();
+
+            TxNContrato.Text = " ";
+            TxRutCliente.Text = " ";
+            LbNombreCliente.Content = " ";
+            DpFechaCreacion.SelectedDate = DateTime.Today;
+            DpFechaTermino.SelectedDate = DateTime.Today;
+            DpFechaInicioVig.SelectedDate = DateTime.Today;
+            DpFechaFInVig.SelectedDate = DateTime.Today;
+
+            CbCodigoPlan.SelectedValue = 1;
+            CbTipoPlan.SelectedValue = 1;
+            TxObservaciones.Text = " ";
+            ChBVigencia.IsChecked = false;
+            ChBDeclaracionSalud.IsChecked = false;
+
+            
+            txt_patente.Text = " ";
+            txt_anio.Text = " ";
+            txt_marca.Text = " ";
+            txt_modelo.Text = " ";
+            
+
 
 
         }
@@ -711,6 +744,7 @@ namespace BelifeWPf
                     ChBDeclaracionSalud.IsChecked = false;
                 }
 
+
                 //bloquear los datos
                 TxRutCliente.IsEnabled = false;
                 DpFechaCreacion.IsEnabled = false;
@@ -1158,6 +1192,66 @@ namespace BelifeWPf
             }
         }
 
+        public void SaveMementoVeh()
+        {
+            try
+            {
+                Contrato contrato = new Contrato();
+
+                LbNombreCliente.Content = " ";
+                contrato.RutCliente = TxRutCliente.Text;
+                contrato.FechaCreacion = (DateTime)DpFechaCreacion.SelectedDate;
+                contrato.FechaTermino = (DateTime)DpFechaTermino.SelectedDate;
+                contrato.FechaInicioVigencia = (DateTime)DpFechaInicioVig.SelectedDate;
+                contrato.FechaFinVigencia = (DateTime)DpFechaFInVig.SelectedDate;
+                if (TxPrimaMensual.Text.Equals(""))
+                {
+                    contrato.PrimaMensual = 0;
+                }
+                else
+                {
+                    contrato.PrimaAnual = Convert.ToDouble(TxPrimaMensual.Text);
+                }
+                if (TxPrimaAnual.Text.Equals(""))
+                {
+                    contrato.PrimaAnual = 0;
+                }
+                else
+                {
+                    contrato.PrimaAnual = Convert.ToDouble(TxPrimaAnual.Text);
+                }
+                contrato.PrimaAnual = Convert.ToDouble(TxPrimaAnual.Text);
+                contrato.CodigoPlan = CbCodigoPlan.SelectedValue.ToString();
+                contrato.IdTipoContrato = int.Parse(CbTipoPlan.SelectedValue.ToString());
+                contrato.Observaciones = TxObservaciones.Text;
+                contrato.Vigente = ChBVigencia.IsChecked.Value;
+                contrato.DeclaracionSalud = ChBDeclaracionSalud.IsChecked.Value;
+
+
+                contrato.Numero = TxNContrato.Text;
+
+
+                Vehiculo veh = new Vehiculo();
+
+                veh.Numero = contrato.Numero;
+                veh.Patente = txt_patente.Text;
+                veh.IdModelo = idModelo;
+                veh.IdMarca = idMarca;
+                veh.Anho = int.Parse(txt_anio.Text);
+
+
+                Caretaker.Memento = contrato.CrearMemento(contrato);
+                Caretaker.Memento= veh.CrearMemento(veh);
+                Caretaker.Memento.SerializarXml();
+                MessageBox.Show("ok");
+            }
+            catch (Exception e)
+            {
+                // MessageBox.Show("dssdf"+ e.Message);
+
+            }
+        }
+
         public void Timer()
         {
             int minutos = 5;
@@ -1181,6 +1275,7 @@ namespace BelifeWPf
         {
 
             SaveMemento();
+            SaveMementoVeh();
 
             //MessageBox.Show("test");
 
@@ -1238,6 +1333,7 @@ namespace BelifeWPf
         private void BtSaveMem_Click(object sender, RoutedEventArgs e)
         {
             SaveMemento();
+            SaveMementoVeh();
         }
     }
 
