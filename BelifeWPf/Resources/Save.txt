@@ -4,22 +4,22 @@
     <Numero />
     <FechaCreacion>2020-07-13T00:00:00-04:00</FechaCreacion>
     <FechaTermino>2020-07-13T00:00:00-04:00</FechaTermino>
-    <RutCliente />
-    <CodigoPlan />
-    <IdTipoContrato>0</IdTipoContrato>
+    <RutCliente>17845162</RutCliente>
+    <CodigoPlan>VID01</CodigoPlan>
+    <IdTipoContrato>10</IdTipoContrato>
     <FechaInicioVigencia>2020-07-13T00:00:00-04:00</FechaInicioVigencia>
     <FechaFinVigencia>2020-07-13T00:00:00-04:00</FechaFinVigencia>
     <Vigente>true</Vigente>
     <DeclaracionSalud>true</DeclaracionSalud>
     <PrimaAnual>0</PrimaAnual>
     <PrimaMensual>0</PrimaMensual>
-    <Observaciones />
+    <Observaciones>jhbjhb</Observaciones>
   </MementoContrato>
   <MementoVehiculo>
-    <Patente>DF2365</Patente>
+    <Patente />
     <IdMarca>0</IdMarca>
     <IdModelo>0</IdModelo>
-    <Anho>1995</Anho>
-    <Numero>20200713123632</Numero>
+    <Anho>0</Anho>
+    <Numero />
   </MementoVehiculo>
 </EstadoAnterior>

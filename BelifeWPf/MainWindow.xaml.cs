@@ -756,45 +756,7 @@ namespace BelifeWPf
                 }
 
 
-                //private void Lbox_marcas_SelectionChanged(object sender, SelectionChangedEventArgs e)
-                //{
-                //    try
-                //    {
-                //        Modelo mode = new Modelo();
-                //        var item = (ListBox)sender;
-                //        var VehiculoMarca = (Marca)item.SelectedItem;
-
-                //        txt_marca.Text = VehiculoMarca.Descripcion;
-                //        idMarca = VehiculoMarca.IdMarca;
-                //        lbox_modelos.ItemsSource = mode.ReadAllByMarca(VehiculoMarca.IdMarca);
-                //        lbox_modelos.Items.Refresh();
-                //    }
-                //    catch (Exception)
-                //    {
-                //        txt_marca.Text = null;
-                //        lbox_modelos.Items.Refresh();
-
-
-                //    }
-
-                //}
-
-                //private void Lbox_modelos_SelectionChanged(object sender, SelectionChangedEventArgs e)
-                //{
-                //    try
-                //    {
-                //        var item = (ListBox)sender;
-                //        var VehiculoModelo = (Modelo)item.SelectedItem;
-                //        txt_modelo.Text = VehiculoModelo.Descripcion;
-                //        idModelo = VehiculoModelo.IdModelo;
-                //    }
-                //    catch (Exception)
-                //    {
-                //        txt_modelo.Text = null;
-
-
-                //    }
-                //}
+  
 
                 //bloquear los datos
                 TxRutCliente.IsEnabled = false;
@@ -1295,7 +1257,7 @@ namespace BelifeWPf
                 Caretaker.Memento = contrato.CrearMemento(contrato);
                 Caretaker.Memento= veh.CrearMemento(veh);
                 Caretaker.Memento.SerializarXml();
-                MessageBox.Show("ok");
+        
             }
             catch (Exception e)
             {
@@ -1306,7 +1268,7 @@ namespace BelifeWPf
 
         public void Timer()
         {
-            int minutos = 5;
+            int minutos = 1;
             DispatcherTimer TimerCache = new DispatcherTimer();
             try
             {
@@ -1336,7 +1298,7 @@ namespace BelifeWPf
         // Lee los datos de un memento
         public void ReadMemento()
         {
-           
+
             estadoAnterior.DeserializarXML();
             con= estadoAnterior.MementoContrato;
             Read();
@@ -1378,8 +1340,17 @@ namespace BelifeWPf
                 ChBDeclaracionSalud.IsChecked = false;
             }
 
-            await this.ShowMessageAsync("Información", "Se ha Recuperado la Información de Contrato");
-            
+            //await this.ShowMessageAsync("Información", "Se ha Recuperado la Información de Contrato");
+            if (await DialogosMetro.DialogTwoOptions("Si", "No", $"¿Desea recuperar la Información del Contrato ?", "Si para, recuperar") == MahApps.Metro.Controls.Dialogs.MessageDialogResult.Affirmative)
+            {
+                Console.WriteLine("recupera datos");
+            }
+            else
+            {
+                Console.WriteLine("limpia");
+                LimpiarControles();
+            }
+
         }
 
         private void BtSaveMem_Click(object sender, RoutedEventArgs e)
