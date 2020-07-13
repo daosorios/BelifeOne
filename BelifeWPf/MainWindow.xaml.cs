@@ -853,7 +853,10 @@ namespace BelifeWPf
             TxNContrato.Text = string.Empty;
             LbNombreCliente.Content = "";
 
-
+            txt_anio.Text = string.Empty;
+            txt_marca.Text = string.Empty;
+            txt_modelo.Text = string.Empty;
+            txt_patente.Text = string.Empty;
           
 
             //bloquear los datos
@@ -1197,7 +1200,7 @@ namespace BelifeWPf
 
                 Caretaker.Memento = contrato.CrearMemento(contrato);
                 Caretaker.Memento.SerializarXml();
-                MessageBox.Show("ok");
+               
             }
             catch (Exception e)
             {
@@ -1268,7 +1271,7 @@ namespace BelifeWPf
 
         public void Timer()
         {
-            int minutos = 1;
+            int minutos = 5;
             DispatcherTimer TimerCache = new DispatcherTimer();
             try
             {
@@ -1340,14 +1343,14 @@ namespace BelifeWPf
                 ChBDeclaracionSalud.IsChecked = false;
             }
 
-            //await this.ShowMessageAsync("Información", "Se ha Recuperado la Información de Contrato");
-            if (await DialogosMetro.DialogTwoOptions("Si", "No", $"¿Desea recuperar la Información del Contrato ?", "Si para, recuperar") == MahApps.Metro.Controls.Dialogs.MessageDialogResult.Affirmative)
+            
+            if (await DialogosMetro.DialogTwoOptions("Si", "No", $"Informacion de Contrato", "Desea Recuperar") == MahApps.Metro.Controls.Dialogs.MessageDialogResult.Affirmative)
             {
-                Console.WriteLine("recupera datos");
+                //Console.WriteLine("recupera datos");
             }
             else
             {
-                Console.WriteLine("limpia");
+                //Console.WriteLine("limpia");
                 LimpiarControles();
             }
 

@@ -273,7 +273,7 @@ namespace BeLife.Negocio
         public EstadoAnterior CrearMemento(Contrato contrato)
         {
 
-            Console.WriteLine("entrando a memento");
+            //Console.WriteLine("entrando a memento");
             EstadoAnterior estadoAnterior = new EstadoAnterior();
             CommonBC.Syncronize(this, estadoAnterior.MementoContrato);
             CommonBC.Syncronize(contrato, estadoAnterior.MementoContrato);
