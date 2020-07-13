@@ -57,7 +57,22 @@ namespace BeLife.Negocio
 
         }
 
+        public bool ReadByNroContrato()
+        {
+            Console.WriteLine("lees el vehiculo entro");
+            Datos.BeLifeEntities bbdd = new Datos.BeLifeEntities();
+            try
+            {
+                Datos.Vehiculo vehiculo = bbdd.Vehiculo.First(v => v.Contrato.FirstOrDefault(c => c.Numero == Numero).Numero == Numero);
 
+                CommonBC.Syncronize(vehiculo, this);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
         public bool Read()
         {
             Datos.BeLifeEntities bbdd = new Datos.BeLifeEntities();

@@ -503,17 +503,8 @@ namespace BelifeWPf
 
         }
 
-        //private void CargarID()
-        //{
-        //    Plan plan = new Plan();
-        //    CbCodigo .ItemsSource = plan.ReadAll3();
-        //    CbCodigo.DisplayMemberPath = "Nombre";
-        //    CbCodigo.SelectedValuePath = "IdPlan";
 
-
-        //}
-
-
+        
 
         //BOTON CREAR CONTRATO
         private async void BtCrearContrato_Click(object sender, RoutedEventArgs e)
@@ -744,6 +735,68 @@ namespace BelifeWPf
                     ChBDeclaracionSalud.IsChecked = false;
                 }
 
+                Console.WriteLine(con.IdTipoContrato);
+
+                if (CbTipoPlan.SelectedValue.ToString().Equals("20"))
+                {
+                    Vehiculo vehiculo = new Vehiculo();
+                    vehiculo.Numero = con.Numero;
+                    Console.WriteLine(vehiculo.Patente);
+                    vehiculo.ReadByNroContrato();
+                    txt_patente.Text = vehiculo.Patente;
+                    txt_anio.Text = vehiculo.Anho.ToString();
+
+                    Modelo mode = new Modelo();
+                    Marca marca = new Marca();
+                    txt_marca.Text = marca.ReadByIdMarca(vehiculo.IdMarca);
+                    txt_modelo.Text = mode.ReadBydModelo(vehiculo.IdModelo);
+
+
+
+
+
+                }
+
+
+                //private void Lbox_marcas_SelectionChanged(object sender, SelectionChangedEventArgs e)
+                //{
+                //    try
+                //    {
+                //        Modelo mode = new Modelo();
+                //        var item = (ListBox)sender;
+                //        var VehiculoMarca = (Marca)item.SelectedItem;
+
+                //        txt_marca.Text = VehiculoMarca.Descripcion;
+                //        idMarca = VehiculoMarca.IdMarca;
+                //        lbox_modelos.ItemsSource = mode.ReadAllByMarca(VehiculoMarca.IdMarca);
+                //        lbox_modelos.Items.Refresh();
+                //    }
+                //    catch (Exception)
+                //    {
+                //        txt_marca.Text = null;
+                //        lbox_modelos.Items.Refresh();
+
+
+                //    }
+
+                //}
+
+                //private void Lbox_modelos_SelectionChanged(object sender, SelectionChangedEventArgs e)
+                //{
+                //    try
+                //    {
+                //        var item = (ListBox)sender;
+                //        var VehiculoModelo = (Modelo)item.SelectedItem;
+                //        txt_modelo.Text = VehiculoModelo.Descripcion;
+                //        idModelo = VehiculoModelo.IdModelo;
+                //    }
+                //    catch (Exception)
+                //    {
+                //        txt_modelo.Text = null;
+
+
+                //    }
+                //}
 
                 //bloquear los datos
                 TxRutCliente.IsEnabled = false;

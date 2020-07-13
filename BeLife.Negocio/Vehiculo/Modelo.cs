@@ -65,6 +65,15 @@ namespace BeLife.Negocio
             return GenerarListado(modeloDatos);
         }
 
+        //Segun la id marca entregada, retorna un listado con todos los modelos respectivos
+        public String ReadBydModelo(int idModelo)
+        {
+
+            Datos.BeLifeEntities BBDD = new Datos.BeLifeEntities();
+            Datos.ModeloVehiculo modelo = BBDD.ModeloVehiculo.First(m => m.IdModelo == idModelo);
+            return modelo.Descripcion;
+        }
+
 
         // Crea un listado de modelo vehiculo de negocio a partir de una lista de modelo vehiculo de datos
         private List<Modelo> GenerarListado(List<Datos.ModeloVehiculo> modeloDatos)

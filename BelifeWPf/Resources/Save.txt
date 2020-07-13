@@ -16,10 +16,10 @@
     <Observaciones />
   </MementoContrato>
   <MementoVehiculo>
-    <Patente> 254</Patente>
-    <IdMarca>14</IdMarca>
-    <IdModelo>128</IdModelo>
-    <Anho>1998</Anho>
-    <Numero>20200711060603</Numero>
+    <Patente>DF2365</Patente>
+    <IdMarca>0</IdMarca>
+    <IdModelo>0</IdModelo>
+    <Anho>1995</Anho>
+    <Numero>20200709105810</Numero>
   </MementoVehiculo>
 </EstadoAnterior>
