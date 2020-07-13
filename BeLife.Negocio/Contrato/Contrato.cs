@@ -92,9 +92,9 @@ namespace BeLife.Negocio
 
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
+                
                 return false;
             }
         }
@@ -267,6 +267,20 @@ namespace BeLife.Negocio
             {
                 return ReadAll();
             }
+        }
+
+
+        public EstadoAnterior CrearMemento(Contrato contrato)
+        {
+
+            //Console.WriteLine("entrando a memento");
+            EstadoAnterior estadoAnterior = new EstadoAnterior();
+            CommonBC.Syncronize(this, estadoAnterior.MementoContrato);
+            CommonBC.Syncronize(contrato, estadoAnterior.MementoContrato);
+
+
+            return estadoAnterior;
+
         }
 
     }

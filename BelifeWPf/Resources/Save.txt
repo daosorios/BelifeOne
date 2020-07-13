@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<EstadoAnterior xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <MementoContrato>
+    <Numero>20200713020114</Numero>
+    <FechaCreacion>2020-07-13T00:00:00</FechaCreacion>
+    <FechaTermino>2022-07-13T00:00:00</FechaTermino>
+    <RutCliente>1234564</RutCliente>
+    <CodigoPlan>VID02</CodigoPlan>
+    <IdTipoContrato>10</IdTipoContrato>
+    <FechaInicioVigencia>2020-07-13T00:00:00</FechaInicioVigencia>
+    <FechaFinVigencia>2021-07-13T00:00:00</FechaFinVigencia>
+    <Vigente>false</Vigente>
+    <DeclaracionSalud>false</DeclaracionSalud>
+    <PrimaAnual>9.5</PrimaAnual>
+    <PrimaMensual>0</PrimaMensual>
+    <Observaciones>primer </Observaciones>
+  </MementoContrato>
+  <MementoVehiculo>
+    <Patente />
+    <IdMarca>0</IdMarca>
+    <IdModelo>0</IdModelo>
+    <Anho>0</Anho>
+    <Numero />
+  </MementoVehiculo>
+</EstadoAnterior>

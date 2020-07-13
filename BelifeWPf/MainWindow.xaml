@@ -161,10 +161,10 @@
 
             <mah:MetroTabItem Name="TBI3" Header="" Margin="535,-101,-536,102">
                 <Grid>
-                    <mah:MetroTabControl Margin="0,27,0,77" Background="Transparent" SelectionChanged="MetroTabControl_SelectionChanged">
+                    <mah:MetroTabControl x:Name="tc_Secundario" Margin="0,27,0,77" Background="Transparent" SelectionChanged="MetroTabControl_SelectionChanged">
 
 
-                        <mah:MetroTabItem Header="●Contratos Vida" Margin="88,0,-88,0"  IsEnabled="False" IsSelected="True"    >
+                        <mah:MetroTabItem Header="●Contratos" Margin="88,0,-88,0"   IsSelected="True"    >
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="77*"/>
@@ -183,7 +183,7 @@
                                 <Label Style="{DynamicResource Label}" Content="Fin Vigencia:" Margin="182,150,287,228" Width="Auto" Grid.Column="1"></Label>
                                 <Label Style="{DynamicResource Label}" Content="Prima Anual:" Margin="182,190,287,188" Width="Auto" Grid.Column="1"></Label>
                                 <Label Style="{DynamicResource Label}" Content="Prima Mensual:" Margin="155,230,287,148" Width="Auto" Grid.Column="1"></Label>
-                                <Label Style="{DynamicResource Label}" Content="Declaraciòn Salud:" Margin="126,323,287,55" Width="Auto" Grid.Column="1"></Label>
+                                <Label x:Name="lb_declara" Style="{DynamicResource Label}" Content="Declaraciòn Salud:" Margin="126,323,287,55" Width="Auto" Grid.Column="1"></Label>
                                 <Label Style="{DynamicResource Label}" Content="Vigente:" Margin="224,363,287,15" Width="Auto" Grid.Column="1"></Label>
                                 <!--End LABEL-->
 
@@ -252,26 +252,31 @@
 
                             </Grid>
                         </mah:MetroTabItem>
-                        <mah:MetroTabItem Header="●Datos Vehiculo" Margin="0,0,-130,0" IsEnabled="False" HorizontalAlignment="Right" Width="204">
+                        <mah:MetroTabItem x:Name="Titem_datos_vehiculo" Header="●Datos Vehiculo" Margin="0,0,-130,0"  HorizontalAlignment="Right" Width="204">
                             <Grid>
-                                <Label Style="{DynamicResource Label}" Content="Patente:" Margin="159,70,740,308" Width="Auto" RenderTransformOrigin="0.495,0.025"></Label>
-                                <Label Style="{DynamicResource Label}" Content="Marca:" Margin="172,256,740,122" Width="Auto"></Label>
-                                <Label Style="{DynamicResource Label}" Content="Modelo:" Margin="154,186,740,192" Width="Auto"></Label>
-                                <Label Style="{DynamicResource Label}" Content="Año:" Margin="189,128,740,250" Width="Auto"></Label>
+                                <Label Style="{DynamicResource Label}" Content="Patente:" Margin="432,81,467,297" Width="Auto" RenderTransformOrigin="0.495,0.025"></Label>
+                                <Label Style="{DynamicResource Label}" Content="Marca:" Margin="445,200,467,178" Width="Auto"></Label>
+                                <Label Style="{DynamicResource Label}" Content="Modelo:" Margin="432,260,462,118" Width="Auto"></Label>
+                                <Label Style="{DynamicResource Label}" Content="Año:" Margin="462,139,467,239" Width="Auto"></Label>
+                                <Label Style="{DynamicResource Label}" Content="Marcas:" Margin="36,10,744,368"/>
+                                <Label Style="{DynamicResource Label}" Content="Modelos:" Margin="36,200,839,178" Width="Auto"/>
 
-                                <Border  Style="{DynamicResource Input1}" Margin="265,70,458,308" Width="Auto">
-                                    <TextBox x:Name="txtpatente" Style="{DynamicResource Input2}" Margin="-1,1,0,-1" Width="261" Height="Auto" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left"/>
+                                <Border  Style="{DynamicResource Input1}" Margin="538,81,185,297" Width="Auto">
+                                    <TextBox x:Name="txt_patente" Style="{DynamicResource Input2}" Margin="-1,1,0,-1" Width="261" Height="Auto" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left"/>
                                 </Border>
-                                <Border  Style="{DynamicResource Input1}" Margin="265,128,458,250" Width="Auto">
-                                    <TextBox Style="{DynamicResource Input2}" Margin="-1,1,15,-1" Width="Auto" Height="Auto" RenderTransformOrigin="0.5,0.5"/>
+                                <Border  Style="{DynamicResource Input1}" Margin="538,139,185,239" Width="Auto">
+                                    <TextBox x:Name="txt_anio" Style="{DynamicResource Input2}" Margin="-1,1,15,-1" Width="Auto" Height="Auto" RenderTransformOrigin="0.5,0.5"/>
+                                </Border>
+                                <Border  Style="{DynamicResource Input1}" Margin="538,200,185,178" Width="Auto">
+                                    <TextBox x:Name="txt_marca" Style="{DynamicResource Input2}" Margin="-1,1,15,-1" Width="Auto" Height="Auto" RenderTransformOrigin="0.5,0.5"/>
+                                </Border>
+                                <Border  Style="{DynamicResource Input1}" Margin="538,260,185,118" Width="Auto">
+                                    <TextBox x:Name="txt_modelo" Style="{DynamicResource Input2}" Margin="-1,1,15,-1" Width="Auto" Height="Auto" RenderTransformOrigin="0.5,0.5"/>
                                 </Border>
 
-                                <Border Style="{DynamicResource Input1}" Margin="265,188,458,190" Width="Auto">
-                                    <ComboBox x:Name="CbTipoModelo" Foreground="Black" SelectionChanged="CbTipoPlan_SelectionChanged"   Background="Transparent" BorderThickness="0" BorderBrush="Transparent" Margin="3,-1,17,1"/>
-                                </Border>
-                                <Border Style="{DynamicResource Input1}" Margin="265,258,458,120" Width="Auto">
-                                    <ComboBox x:Name="CbTipoMarca" Foreground="Black" SelectionChanged="CbTipoPlan_SelectionChanged"   Background="Transparent" BorderThickness="0" BorderBrush="Transparent" Margin="3,-1,17,1"/>
-                                </Border>
+                                <Border Background="#FF363636" Margin="32,10,623,10" CornerRadius="16" Opacity="0.3"/>
+                                <ListBox x:Name="lbox_marcas" Margin="42,44,638,215" DisplayMemberPath="Descripcion" SelectionChanged="Lbox_marcas_SelectionChanged"/>
+                                <ListBox x:Name="lbox_modelos" Margin="43,235,638,23" DisplayMemberPath="Descripcion" SelectionChanged="Lbox_modelos_SelectionChanged"/>
 
 
 
@@ -388,11 +393,13 @@
             <Image Style="{DynamicResource Imagen360-Contraste}"/>
         </Button>
 
-        <Button Name="Guarda" Style="{DynamicResource boton360Contraste}" Margin="85,555,881,11" Height="34" Width="34" Click="Guarda_Click">
-            <Image Style="{DynamicResource Imagen360-Contraste}"/>
+        <Button x:Name="BtSaveMem" Style="{DynamicResource boton360Save}" Height="34" Width="34" Margin="85,556,881,10" Background="Transparent" Click="BtSaveMem_Click">
+            <Image Source="Imagenes/SaveMem.png"/>
         </Button>
+        
+        
 
-        <mah:Flyout x:Name="fly" Background="Black" Opacity="0.7" Margin="0,72" Foreground="#FFD6D6D6" Width="108">
+        <mah:Flyout x:Name="fly" Background="Black" Opacity="0.7" Margin="-2,72,0,72" Foreground="#FFD6D6D6" Width="108">
             <Canvas Height="384">
 
                 <Button x:Name="BtCliente" Background="Transparent" Canvas.Left="18" Canvas.Top="10" Click="BtCliente_Click" Height="76" Width="73" Padding="0,0,0,0" >

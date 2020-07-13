@@ -40,6 +40,25 @@ namespace BeLife.Negocio
             }
         }
 
+
+        public String ReadByIdMarca(int idMarca)
+        {
+
+            try
+            {
+                Datos.BeLifeEntities BBDD = new Datos.BeLifeEntities();
+                Datos.MarcaVehiculo marca = BBDD.MarcaVehiculo.First(m => m.IdMarca == idMarca);
+                return marca.Descripcion;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine( e.Message);
+            }
+
+            return "";
+        }
+
+
         // Entrega un listado con todas las marcas de la BBDD
 
         public List<Marca> ReadAll()

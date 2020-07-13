@@ -17,6 +17,7 @@ using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using MahApps.Metro.Behaviours;
 using BeLife.Negocio;
+using System.Windows.Threading;
 
 namespace BelifeWPf
 {
@@ -26,16 +27,35 @@ namespace BelifeWPf
     public partial class MainWindow : MetroWindow
     {
 
+        private PersistenciaMemento Caretaker;
+        private EstadoAnterior estadoAnterior;
+
         bool AltoContraste = false;
 
         public BeLife.Negocio.Contrato _contrato;
         public BeLife.Negocio.Cliente _cliente;
+        public int idModelo;
+        public int idMarca;
+
+        Contrato con = new Contrato();
+
+        //private BeLife.Negocio.Vehiculo Vehiculo;
+        //private BeLife.Negocio.Marca Marca;
+        //private BeLife.Negocio.Modelo Modelo;
+
 
         //public int Id { get; } = 10; 
 
         public MainWindow()
         {
             InitializeComponent();
+            Init();
+            InitVeh();
+
+
+
+            Timer();
+            ReadMemento();
             Cargar();
             CargarSexo();
             CargarEstado();
@@ -54,13 +74,70 @@ namespace BelifeWPf
 
             //registro contrato
         
-       
-
             //Listado de contratos
             CargarContratos();
             //CargarPoliza();
 
+            Marca mar = new Marca();
+            lbox_marcas.ItemsSource = mar.ReadAll();
+
         }
+
+
+        private void Init()
+        {
+
+            Caretaker = new PersistenciaMemento();
+            estadoAnterior = new EstadoAnterior();
+
+            TxNContrato.Text = " ";
+            TxRutCliente.Text = " ";
+            LbNombreCliente.Content = " ";       
+            DpFechaCreacion.SelectedDate = DateTime.Today;
+            DpFechaTermino.SelectedDate = DateTime.Today;
+            DpFechaInicioVig.SelectedDate = DateTime.Today;
+            DpFechaFInVig.SelectedDate = DateTime.Today;
+        
+            CbCodigoPlan.SelectedValue = 1;
+            CbTipoPlan.SelectedValue = 1;
+            TxObservaciones.Text = " ";
+            ChBVigencia.IsChecked = false;
+            ChBDeclaracionSalud.IsChecked = false;
+
+
+        }
+
+        private void InitVeh()
+        {
+
+            Caretaker = new PersistenciaMemento();
+            estadoAnterior = new EstadoAnterior();
+
+            TxNContrato.Text = " ";
+            TxRutCliente.Text = " ";
+            LbNombreCliente.Content = " ";
+            DpFechaCreacion.SelectedDate = DateTime.Today;
+            DpFechaTermino.SelectedDate = DateTime.Today;
+            DpFechaInicioVig.SelectedDate = DateTime.Today;
+            DpFechaFInVig.SelectedDate = DateTime.Today;
+
+            CbCodigoPlan.SelectedValue = 1;
+            CbTipoPlan.SelectedValue = 1;
+            TxObservaciones.Text = " ";
+            ChBVigencia.IsChecked = false;
+            ChBDeclaracionSalud.IsChecked = false;
+
+            
+            txt_patente.Text = " ";
+            txt_anio.Text = " ";
+            txt_marca.Text = " ";
+            txt_modelo.Text = " ";
+            
+
+
+
+        }
+
 
         private void Btn_despliegaFly_Click(object sender, RoutedEventArgs e)
         {
@@ -423,22 +500,11 @@ namespace BelifeWPf
             CbTipoPlan.SelectedValuePath = "IdTipoContrato";
             CbTipoPlan.SelectedIndex = 0; //Posiciona en el primer registro
 
-     
-
 
         }
 
-        //private void CargarID()
-        //{
-        //    Plan plan = new Plan();
-        //    CbCodigo .ItemsSource = plan.ReadAll3();
-        //    CbCodigo.DisplayMemberPath = "Nombre";
-        //    CbCodigo.SelectedValuePath = "IdPlan";
 
-
-        //}
-
-
+        
 
         //BOTON CREAR CONTRATO
         private async void BtCrearContrato_Click(object sender, RoutedEventArgs e)
@@ -479,7 +545,7 @@ namespace BelifeWPf
 
 
             contrato.RutCliente = TxRutCliente.Text;
-
+     
             contrato.FechaCreacion = DateTime.Today;
             contrato.FechaTermino = (DateTime)DpFechaTermino.SelectedDate;
             contrato.FechaInicioVigencia = (DateTime)DpFechaInicioVig.SelectedDate;
@@ -514,17 +580,36 @@ namespace BelifeWPf
 
             contrato.Numero = Convert.ToDateTime((DateTime.Now)).ToString("yyyyMMddhhmmss");
 
+
             if (contrato.CreateContrato())
             {
+                if (CbTipoPlan.SelectedValue.ToString().Equals("20"))
+                {
+                    Vehiculo veh = new Vehiculo();
+
+                    veh.Numero = contrato.Numero;
+                    veh.Patente = txt_patente.Text;
+                    veh.IdModelo = idModelo;
+                    veh.IdMarca = idMarca;
+                    veh.Anho = int.Parse(txt_anio.Text);
+
+                    veh.CreateContratoVehiculo();
+
+                }
                 await this.ShowMessageAsync("Exito", "Contrato Registrado");
                 LimpiarControles();
             }
             else
             {
                 await this.ShowMessageAsync("Intentalo Nuevamente", "Contrato No Pudo Ser Registrado");
-                
+
             }
+
+
         }
+
+
+
 
 
         //BOTON ACTUALIZAR 
@@ -650,6 +735,29 @@ namespace BelifeWPf
                     ChBDeclaracionSalud.IsChecked = false;
                 }
 
+                Console.WriteLine(con.IdTipoContrato);
+
+                if (CbTipoPlan.SelectedValue.ToString().Equals("20"))
+                {
+                    Vehiculo vehiculo = new Vehiculo();
+                    vehiculo.Numero = con.Numero;
+                    Console.WriteLine(vehiculo.Patente);
+                    vehiculo.ReadByNroContrato();
+                    txt_patente.Text = vehiculo.Patente;
+                    txt_anio.Text = vehiculo.Anho.ToString();
+
+                    Modelo mode = new Modelo();
+                    Marca marca = new Marca();
+                    txt_marca.Text = marca.ReadByIdMarca(vehiculo.IdMarca);
+                    txt_modelo.Text = mode.ReadBydModelo(vehiculo.IdModelo);
+
+
+
+                }
+
+
+  
+
                 //bloquear los datos
                 TxRutCliente.IsEnabled = false;
                 DpFechaCreacion.IsEnabled = false;
@@ -678,6 +786,7 @@ namespace BelifeWPf
         private async void BtTerminarContrato_Click(object sender, RoutedEventArgs e)
         {
             Contrato contrato = new Contrato();
+
             contrato.Numero = TxNContrato.Text;
             contrato.RutCliente = TxRutCliente.Text;
             contrato.FechaCreacion = (DateTime)DpFechaCreacion.SelectedDate;
@@ -744,6 +853,10 @@ namespace BelifeWPf
             TxNContrato.Text = string.Empty;
             LbNombreCliente.Content = "";
 
+            txt_anio.Text = string.Empty;
+            txt_marca.Text = string.Empty;
+            txt_modelo.Text = string.Empty;
+            txt_patente.Text = string.Empty;
           
 
             //bloquear los datos
@@ -978,7 +1091,276 @@ namespace BelifeWPf
         private void CbTipoPlan_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             CargarContrato();
+
+            if (CbTipoPlan.SelectedValue.ToString().Equals("20"))
+            {
+                Titem_datos_vehiculo.IsEnabled = true;
+                ChBDeclaracionSalud.Visibility = Visibility.Collapsed;
+                lb_declara.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                Titem_datos_vehiculo.IsEnabled = false;
+                ChBDeclaracionSalud.Visibility = Visibility.Visible;
+                lb_declara.Visibility = Visibility.Visible;
+
+
+
+            }
+        }
+
+        private void Lbox_marcas_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                Modelo mode = new Modelo();
+                var item = (ListBox)sender;
+                var VehiculoMarca = (Marca)item.SelectedItem;
+
+                txt_marca.Text = VehiculoMarca.Descripcion;
+                idMarca = VehiculoMarca.IdMarca;
+                lbox_modelos.ItemsSource = mode.ReadAllByMarca(VehiculoMarca.IdMarca);
+                lbox_modelos.Items.Refresh();
+            }
+            catch (Exception)
+            {
+                txt_marca.Text = null;
+                lbox_modelos.Items.Refresh();
+
+
+            }
+
+        }
+
+        private void Lbox_modelos_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                var item = (ListBox)sender;
+                var VehiculoModelo = (Modelo)item.SelectedItem;
+                txt_modelo.Text = VehiculoModelo.Descripcion;
+                idModelo = VehiculoModelo.IdModelo;
+            }
+            catch (Exception)
+            {
+                txt_modelo.Text = null;
+
+
+            }
+        }
+
+
+        public void SaveMemento()
+        {
+            try
+            {
+                Contrato contrato = new Contrato();
+
+                LbNombreCliente.Content = " ";           
+                contrato.RutCliente = TxRutCliente.Text;
+                contrato.FechaCreacion = (DateTime)DpFechaCreacion.SelectedDate;
+                contrato.FechaTermino = (DateTime)DpFechaTermino.SelectedDate;
+                contrato.FechaInicioVigencia = (DateTime)DpFechaInicioVig.SelectedDate;
+                contrato.FechaFinVigencia = (DateTime)DpFechaFInVig.SelectedDate;
+                if (TxPrimaMensual.Text.Equals(""))
+                {
+                    contrato.PrimaMensual = 0;
+                }
+                else
+                {
+                    contrato.PrimaAnual = Convert.ToDouble(TxPrimaMensual.Text);
+                }
+                if (TxPrimaAnual.Text.Equals(""))
+                {
+                    contrato.PrimaAnual = 0;
+                }
+                else
+                {
+                    contrato.PrimaAnual = Convert.ToDouble(TxPrimaAnual.Text);
+                }
+                contrato.PrimaAnual = Convert.ToDouble(TxPrimaAnual.Text);
+                contrato.CodigoPlan = CbCodigoPlan.SelectedValue.ToString();
+                contrato.IdTipoContrato = int.Parse(CbTipoPlan.SelectedValue.ToString());
+                contrato.Observaciones = TxObservaciones.Text;
+                contrato.Vigente = ChBVigencia.IsChecked.Value;
+                contrato.DeclaracionSalud = ChBDeclaracionSalud.IsChecked.Value;
+               
+                  
+                contrato.Numero = TxNContrato.Text;
+
+
+                //Vehiculo veh = new Vehiculo();
+
+                //veh.Numero = contrato.Numero;
+                //veh.Patente = txt_patente.Text;
+                //veh.IdModelo = idModelo;
+                //veh.IdMarca = idMarca;
+                //veh.Anho = int.Parse(txt_anio.Text);
+
+
+                Caretaker.Memento = contrato.CrearMemento(contrato);
+                Caretaker.Memento.SerializarXml();
+               
+            }
+            catch (Exception e)
+            {
+               // MessageBox.Show("dssdf"+ e.Message);
+
+            }
+        }
+
+        public void SaveMementoVeh()
+        {
+            try
+            {
+                Contrato contrato = new Contrato();
+
+                LbNombreCliente.Content = " ";
+                contrato.RutCliente = TxRutCliente.Text;
+                contrato.FechaCreacion = (DateTime)DpFechaCreacion.SelectedDate;
+                contrato.FechaTermino = (DateTime)DpFechaTermino.SelectedDate;
+                contrato.FechaInicioVigencia = (DateTime)DpFechaInicioVig.SelectedDate;
+                contrato.FechaFinVigencia = (DateTime)DpFechaFInVig.SelectedDate;
+                if (TxPrimaMensual.Text.Equals(""))
+                {
+                    contrato.PrimaMensual = 0;
+                }
+                else
+                {
+                    contrato.PrimaAnual = Convert.ToDouble(TxPrimaMensual.Text);
+                }
+                if (TxPrimaAnual.Text.Equals(""))
+                {
+                    contrato.PrimaAnual = 0;
+                }
+                else
+                {
+                    contrato.PrimaAnual = Convert.ToDouble(TxPrimaAnual.Text);
+                }
+                contrato.PrimaAnual = Convert.ToDouble(TxPrimaAnual.Text);
+                contrato.CodigoPlan = CbCodigoPlan.SelectedValue.ToString();
+                contrato.IdTipoContrato = int.Parse(CbTipoPlan.SelectedValue.ToString());
+                contrato.Observaciones = TxObservaciones.Text;
+                contrato.Vigente = ChBVigencia.IsChecked.Value;
+                contrato.DeclaracionSalud = ChBDeclaracionSalud.IsChecked.Value;
+
+
+                contrato.Numero = TxNContrato.Text;
+
+
+                Vehiculo veh = new Vehiculo();
+
+                veh.Numero = contrato.Numero;
+                veh.Patente = txt_patente.Text;
+                veh.IdModelo = idModelo;
+                veh.IdMarca = idMarca;
+                veh.Anho = int.Parse(txt_anio.Text);
+
+
+                Caretaker.Memento = contrato.CrearMemento(contrato);
+                Caretaker.Memento= veh.CrearMemento(veh);
+                Caretaker.Memento.SerializarXml();
+        
+            }
+            catch (Exception e)
+            {
+                // MessageBox.Show("dssdf"+ e.Message);
+
+            }
+        }
+
+        public void Timer()
+        {
+            int minutos = 5;
+            DispatcherTimer TimerCache = new DispatcherTimer();
+            try
+            {
+                //MessageBox.Show("ok" + minutos);
+                TimerCache.Interval = TimeSpan.FromMinutes(minutos);
+                TimerCache.Tick += dtTicker;
+                TimerCache.Start();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+
+
+        private void dtTicker(object sender, EventArgs e)
+        {
+
+            SaveMemento();
+            SaveMementoVeh();
+
+            //MessageBox.Show("test");
+
+        }
+
+        // Lee los datos de un memento
+        public void ReadMemento()
+        {
+
+            estadoAnterior.DeserializarXML();
+            con= estadoAnterior.MementoContrato;
+            Read();
+        }
+
+        private async void Read()
+        {         
+          
+            TxNContrato.Text = con.Numero;
+            TxRutCliente.Text = con.RutCliente;
+            DpFechaCreacion.SelectedDate = con.FechaCreacion;
+            DpFechaTermino.SelectedDate = con.FechaTermino;
+            DpFechaInicioVig.SelectedDate = con.FechaInicioVigencia;
+            DpFechaFInVig.SelectedDate = con.FechaFinVigencia;
+            TxPrimaMensual.Text = con.PrimaMensual.ToString();
+            TxPrimaAnual.Text = con.PrimaAnual.ToString();
+            CbCodigoPlan.SelectedValue = con.CodigoPlan;
+            CbTipoPlan.SelectedValue = con.IdTipoContrato;
+            TxObservaciones.Text = con.Observaciones;
+           
+
+            //Checkbox de vigencia
+            if (con.Vigente == true)
+            {
+                ChBVigencia.IsChecked = true;
+            }
+            else
+            {
+                ChBVigencia.IsChecked = false;
+            }
+
+            //Checkbox de decaracion salud
+            if (con.DeclaracionSalud == true)
+            {
+                ChBDeclaracionSalud.IsChecked = true;
+            }
+            else
+            {
+                ChBDeclaracionSalud.IsChecked = false;
+            }
+
+            
+            if (await DialogosMetro.DialogTwoOptions("Si", "No", $"Informacion de Contrato", "Desea Recuperar") == MahApps.Metro.Controls.Dialogs.MessageDialogResult.Affirmative)
+            {
+                //Console.WriteLine("recupera datos");
+            }
+            else
+            {
+                //Console.WriteLine("limpia");
+                LimpiarControles();
+            }
+
+        }
+
+        private void BtSaveMem_Click(object sender, RoutedEventArgs e)
+        {
+            SaveMemento();
+            SaveMementoVeh();
         }
     }
-    
+
 }

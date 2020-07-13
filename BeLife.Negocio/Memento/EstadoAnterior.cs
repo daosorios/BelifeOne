@@ -11,21 +11,24 @@ namespace BeLife.Negocio
 {
     public class EstadoAnterior
     {
-        private Cliente _mementoCliente;
+       
         private Contrato _mementoContrato;
+        private Vehiculo _mementoVehiculo;
 
 
-        public Cliente MementoCliente
-        {
-            get { return _mementoCliente; }
-            set { _mementoCliente = value; }
-        }
 
         public Contrato MementoContrato
         {
             get { return _mementoContrato; }
             set { _mementoContrato = value; }
         }
+
+        public Vehiculo MementoVehiculo
+        {
+            get { return _mementoVehiculo; }
+            set { _mementoVehiculo = value; }
+        }
+
 
         public EstadoAnterior()
         {
@@ -34,8 +37,9 @@ namespace BeLife.Negocio
 
         private void Init()
         {
-            MementoCliente = new Cliente();
+            //MementoCliente = new Cliente();
             MementoContrato = new Contrato();
+            MementoVehiculo = new Vehiculo();
         }
 
         public void SerializarXml()
