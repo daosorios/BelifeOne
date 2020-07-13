@@ -43,11 +43,19 @@ namespace BeLife.Negocio
 
         public String ReadByIdMarca(int idMarca)
         {
-            Datos.BeLifeEntities BBDD = new Datos.BeLifeEntities();
-            Datos.MarcaVehiculo marca = BBDD.MarcaVehiculo.First(m => m.IdMarca == idMarca);
 
-            return marca.Descripcion;
-  
+            try
+            {
+                Datos.BeLifeEntities BBDD = new Datos.BeLifeEntities();
+                Datos.MarcaVehiculo marca = BBDD.MarcaVehiculo.First(m => m.IdMarca == idMarca);
+                return marca.Descripcion;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine( e.Message);
+            }
+
+            return "";
         }
 
 

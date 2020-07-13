@@ -69,9 +69,20 @@ namespace BeLife.Negocio
         public String ReadBydModelo(int idModelo)
         {
 
-            Datos.BeLifeEntities BBDD = new Datos.BeLifeEntities();
-            Datos.ModeloVehiculo modelo = BBDD.ModeloVehiculo.First(m => m.IdModelo == idModelo);
-            return modelo.Descripcion;
+            try
+            {
+                Datos.BeLifeEntities BBDD = new Datos.BeLifeEntities();
+                Datos.ModeloVehiculo modelo = BBDD.ModeloVehiculo.First(m => m.IdModelo == idModelo);
+                return modelo.Descripcion;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+            return "";
+
+
         }
 
 

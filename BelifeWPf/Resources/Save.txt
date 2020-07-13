@@ -2,13 +2,13 @@
 <EstadoAnterior xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <MementoContrato>
     <Numero />
-    <FechaCreacion>2020-07-12T00:00:00-04:00</FechaCreacion>
-    <FechaTermino>2020-07-12T00:00:00-04:00</FechaTermino>
+    <FechaCreacion>2020-07-13T00:00:00-04:00</FechaCreacion>
+    <FechaTermino>2020-07-13T00:00:00-04:00</FechaTermino>
     <RutCliente />
     <CodigoPlan />
     <IdTipoContrato>0</IdTipoContrato>
-    <FechaInicioVigencia>2020-07-12T00:00:00-04:00</FechaInicioVigencia>
-    <FechaFinVigencia>2020-07-12T00:00:00-04:00</FechaFinVigencia>
+    <FechaInicioVigencia>2020-07-13T00:00:00-04:00</FechaInicioVigencia>
+    <FechaFinVigencia>2020-07-13T00:00:00-04:00</FechaFinVigencia>
     <Vigente>true</Vigente>
     <DeclaracionSalud>true</DeclaracionSalud>
     <PrimaAnual>0</PrimaAnual>
@@ -20,6 +20,6 @@
     <IdMarca>0</IdMarca>
     <IdModelo>0</IdModelo>
     <Anho>1995</Anho>
-    <Numero>20200709105810</Numero>
+    <Numero>20200713123632</Numero>
   </MementoVehiculo>
 </EstadoAnterior>

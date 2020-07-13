@@ -753,8 +753,6 @@ namespace BelifeWPf
 
 
 
-
-
                 }
 
 
@@ -892,6 +890,7 @@ namespace BelifeWPf
             CbCodigoPlan.SelectedIndex = 0;
             TxNContrato.Text = string.Empty;
             LbNombreCliente.Content = "";
+
 
           
 
